@@ -4,7 +4,7 @@ const getLogger = require("../logger");
 
 const logger = getLogger("db");
 
-const { MONGO_URI} = process.env;
+const { MONGO_URI } = process.env;
 // const connectionString = MONGO_URI
 mongoose
   .connect(`${MONGO_URI}`)
