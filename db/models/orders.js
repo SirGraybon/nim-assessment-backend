@@ -53,8 +53,21 @@ const Order = mongoose.model("Order", orderSchema);
 const getAll = async () => {
   // populate each item
   const orders = await Order.find().populate("items.item");
-
+  console.log(orders);
   return orders;
+};
+const getTotalSales = async () => {
+  // populate each item
+  const orders = await Order.find().populate("items.item");
+  const totalSales = orders.reduce((grandTotal, indiOrder) => {
+    const orderTotal = indiOrder.items.reduce(
+      (total, instance) => total + instance.item.price,
+      0
+    );
+    return grandTotal + orderTotal;
+  }, 0);
+
+  return { total: totalSales };
 };
 
 const getOne = async (id) => {
@@ -81,6 +94,12 @@ const getByStatus = async (status) => {
   const orders = await Order.find({ status }).populate("items");
   return orders;
 };
+const getByOrderStatus = async (status) => {
+  const orders = await Order.find({
+    $or: [{ status }]
+  });
+  return orders;
+};
 
 module.exports = {
   getAll,
@@ -89,5 +108,7 @@ module.exports = {
   update,
   remove,
   getByStatus,
+  getByOrderStatus,
+  getTotalSales,
   Order
 };

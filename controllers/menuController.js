@@ -18,10 +18,10 @@ const getOne = async (req, res) => {
   }
 };
 const search = async (req, res) => {
-  const query = req.query.q
+  const query = req.query.q;
   try {
     const menu = await MenuItems.find(query);
-    console.log(menu)
+    console.log(menu);
     res.send(menu);
   } catch (error) {
     res.status(500).send(error);
