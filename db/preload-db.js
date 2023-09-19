@@ -59,7 +59,6 @@ const menuItems = [
 ];
 
 const preload = async () => {
-  console.log("step 1 ****************")
   // drop the database
   await mongoose.connection.collections.menuitems.drop();
   await mongoose.connection.collections.orders.drop();
@@ -67,7 +66,7 @@ const preload = async () => {
     menuItems.map((item) => createMenuItem(item))
   );
   // eslint-disable-next-line no-console
-  // console.log("createdMenuItems", createdMenuItems);
+  console.log("createdMenuItems", createdMenuItems);
   // create some new orders
   const orders = [
     {
