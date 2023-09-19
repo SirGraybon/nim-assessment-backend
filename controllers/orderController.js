@@ -8,6 +8,14 @@ const getAll = async (req, res) => {
     res.status(500).send(error);
   }
 };
+const totalSales = async (req, res) => {
+  try {
+    const orders = await Order.getTotalSales();
+    res.send(orders);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
 const getOne = async (req, res) => {
   try {
@@ -74,5 +82,6 @@ module.exports = {
   update,
   remove,
   getByCustomer,
-  getByStatus
+  getByStatus,
+  totalSales
 };
