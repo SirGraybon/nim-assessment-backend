@@ -59,7 +59,6 @@ const menuItems = [
 ];
 
 const preload = async () => {
-  console.log("step 1 ****************")
   // drop the database
   await mongoose.connection.collections.menuitems.drop();
   await mongoose.connection.collections.orders.drop();

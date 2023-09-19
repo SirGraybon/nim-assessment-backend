@@ -16,6 +16,9 @@ const menuItemsSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String
+  }, updatedAt: {
+    type: Date,
+    default: Date.now
   }
 });
 menuItemsSchema.set("toJSON", {
@@ -50,5 +53,13 @@ const create = async (body) => {
     return error;
   }
 };
+const update = async (id, body) => {
+  const menuItem = await MenuItems.findByIdAndUpdate(id, body, { new: true });
+  return menuItem;
+};
+const remove = async (id) => {
+  const order = await MenuItems.findByIdAndDelete(id);
+  return order.id;
+};
 
-module.exports = { getAll, getOne, create, MenuItems };
+module.exports = { getAll, getOne, create, update, remove, MenuItems };
