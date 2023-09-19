@@ -66,7 +66,7 @@ const preload = async () => {
     menuItems.map((item) => createMenuItem(item))
   );
   // eslint-disable-next-line no-console
-  // console.log("createdMenuItems", createdMenuItems);
+  console.log("createdMenuItems", createdMenuItems);
   // create some new orders
   const orders = [
     {

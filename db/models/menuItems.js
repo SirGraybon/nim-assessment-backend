@@ -16,7 +16,8 @@ const menuItemsSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String
-  }, updatedAt: {
+  },
+  updatedAt: {
     type: Date,
     default: Date.now
   }
@@ -30,6 +31,20 @@ const MenuItems = mongoose.model("MenuItems", menuItemsSchema);
 const getAll = async () => {
   try {
     const menuItems = await MenuItems.find();
+    return menuItems;
+  } catch (error) {
+    return error;
+  }
+};
+const find = async (query) => {
+  try {
+    const menuItems = await MenuItems.find({
+      $or: [
+        { description: { $regex: new RegExp(query, "i") } },
+        { name: { $regex: new RegExp(query, "i") } }
+      ]
+    });
+    console.log(menuItems);
     return menuItems;
   } catch (error) {
     return error;
@@ -62,4 +77,4 @@ const remove = async (id) => {
   return order.id;
 };
 
-module.exports = { getAll, getOne, create, update, remove, MenuItems };
+module.exports = { getAll, getOne, create, update, remove, find, MenuItems };
